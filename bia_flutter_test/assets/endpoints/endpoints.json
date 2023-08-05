@@ -1,0 +1,4 @@
+{
+    "baseUrl": "gateway.marvel.com",
+    "getCharactersUrl": "v1/public/characters"
+}
