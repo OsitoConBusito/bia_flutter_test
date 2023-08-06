@@ -26,7 +26,6 @@ linter:
     - comment_references
     - control_flow_in_finally
     - deprecated_member_use_from_same_package
-    - diagnostic_describe_all_properties
     - discarded_futures
     - empty_statements
     - hash_and_equals

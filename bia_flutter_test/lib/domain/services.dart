@@ -29,7 +29,7 @@ class Service {
     hash = apiKeysJson['hash']!;
   }
 
-  Future<CharactersResponse> getCharacters() async {
+  Future<CharactersResponse> getCharacters(Ordering filterRequest) async {
     await loadEndpoins();
     await loadApiKeys();
     final String getCharactersUrl = endpointsJson['getCharactersUrl']!;
@@ -41,6 +41,7 @@ class Service {
         'apikey': marvelApiKey,
         'hash': hash,
         'ts': '1',
+        'orderBy': filterRequest.name,
       },
     );
 

@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 import '../constants/paddings.dart';
 import '../constants/sizes.dart';
 import '../data/characters_response.dart';
+import '../data/filter_request.dart';
 import '../domain/domain.dart';
 
 part 'list_screen.dart';

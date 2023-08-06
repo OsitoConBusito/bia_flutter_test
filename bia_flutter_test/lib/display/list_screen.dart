@@ -10,6 +10,8 @@ class ListScreen extends ConsumerStatefulWidget {
 }
 
 class _ListScreenState extends ConsumerState<ListScreen> {
+  bool isFilterSelected = false;
+
   @override
   Widget build(final BuildContext context) {
     final AsyncValue<CharactersResponse> asyncData =
@@ -17,6 +19,38 @@ class _ListScreenState extends ConsumerState<ListScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('BIA Flutter Test'),
+        actions: <Widget>[
+          IconButton(
+            onPressed: () {
+              isFilterSelected = !isFilterSelected;
+              ref.read(filterProvider.notifier).state =
+                  isFilterSelected ? Ordering.descendName : Ordering.ascendName;
+            },
+            icon: AnimatedSwitcher(
+              duration: const Duration(milliseconds: 500),
+              transitionBuilder:
+                  (final Widget child, final Animation<double> animation) =>
+                      ScaleTransition(scale: animation, child: child),
+              child: Row(
+                key: ValueKey<bool>(isFilterSelected),
+                children: <Icon>[
+                  Icon(
+                    isFilterSelected
+                        ? Icons.arrow_upward
+                        : Icons.arrow_downward,
+                    color:
+                        isFilterSelected ? Colors.primaries[1] : Colors.black,
+                  ),
+                  Icon(
+                    Icons.sort_outlined,
+                    color:
+                        isFilterSelected ? Colors.primaries[1] : Colors.black,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
       body: asyncData.when(
         data: (final CharactersResponse charactersResponse) =>
@@ -66,7 +100,7 @@ class _ListScreenState extends ConsumerState<ListScreen> {
                         ],
                       ),
                       const Spacer(),
-                      Padding(
+                      const Padding(
                         padding: Paddings.padding8,
                         child: Icon(Icons.arrow_circle_right),
                       )
